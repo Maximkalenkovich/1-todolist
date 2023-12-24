@@ -4,7 +4,7 @@ import {Button} from "./Button";
 export type FilterValuesType = "All"|"Active"|"Completed"
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -12,7 +12,7 @@ export type TaskType = {
 type ToDoPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskId: number ) => void
+    removeTask: (taskId: string ) => void
     changeToDoListFilter : (filterValue: FilterValuesType ) => void
 
 }
