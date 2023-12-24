@@ -1,9 +1,9 @@
 import React, {useRef} from "react";
 import {Button} from "./Button";
 
-export type FilterValuesType = "All" | "Active" | "Completed"
+type FilterValuesType = "All" | "Active" | "Completed"
 
-export type TaskType = {
+type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -20,7 +20,7 @@ type ToDoPropsType = {
 
 
 
-export function Todolist({
+ function Todolist({
                              title,
                              addTasks,
                              tasks,
@@ -28,6 +28,8 @@ export function Todolist({
                              changeToDoListFilter
                          }: ToDoPropsType) {
 
+//useref чтобы обратиться к input
+    const tasksTitleInput = useRef<HTMLInputElement>(null)
 
     const listItems: Array<JSX.Element> = tasks.map((task: TaskType) => {
         return (
@@ -46,15 +48,25 @@ export function Todolist({
 
 
 // добавление новой таски
+    function addTasksHandler(){
+        if(tasksTitleInput.current){
+            const newTasksTitle = tasksTitleInput.current.value
+            addTasks(newTasksTitle)
+            tasksTitleInput.current.value = ''
+        }
+    }
 
 
     return (
         <div className='todolist'>
+            {/*<TodolistHeader />*/}
+            {/*<AddTaskForm />*/}
+            {/*<TasksList />*/}
             <div>
                 <h3>{title}</h3>
                 <div>
-                    <input />
-                    <Button title={'+'} onClickHandler={()=>{}}/>
+                    <input ref={tasksTitleInput}/>
+                    <Button title={'+'} onClickHandler={addTasksHandler}/>
                 </div>
                 {tasksList}
                 <div>

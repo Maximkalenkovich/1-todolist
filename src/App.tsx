@@ -15,13 +15,23 @@ function App() {
         {id: v1(), title: "REACT", isDone: false}
     ])
     const [filterValue,setFilterValue] = useState<FilterValuesType>('All')
+
+    // удалить таску
     const removeTask = (taskId: string) => {
         setTasks(tasks.filter( t=> t.id !== taskId))
+    }
+
+    // добавить таску
+    const addTasks = (title: string) =>{
+            //ы создаем новый массив nextState, который состоит из новой задачи newTasks и всех существующих задач из массива tasks. Мы используем оператор распространения ... для развертывания элементов из tasks в новый массив nextState. Таким образом, новая задача будет добавлена в начало массива.
+   setTasks([{id:v1(),title,isDone:false},...tasks])
     }
 
     const changeToDoListFilter = (filterValue: FilterValuesType ) => {
         setFilterValue(filterValue)
     }
+
+    // фильтрация на active all completed
     const getFilteredTasks = (tasks: Array<TaskType>, filter: FilterValuesType): Array<TaskType> => {
         return  filter === "Active"
             ? tasks.filter(t => t.isDone === false)
@@ -33,12 +43,14 @@ function App() {
 
 
 
+
     return (
         <div className="App">
             <Todolist title={todoListTitle}
                       tasks={filteredTasks}
                       removeTask={removeTask}
-            changeToDoListFilter={changeToDoListFilter}/>
+            changeToDoListFilter={changeToDoListFilter}
+            addTasks={addTasks}/>
         </div>
     );
 }
