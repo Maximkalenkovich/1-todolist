@@ -1,5 +1,6 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import {Button} from "./Button";
+import {isDisabled} from "@testing-library/user-event/dist/utils";
 
 export type FilterValuesType = "All" | "Active" | "Completed"
 
@@ -27,6 +28,8 @@ export function Todolist({
                              removeTask,
                              changeToDoListFilter
                          }: ToDoPropsType) {
+    const [taskTitle,setTaskTitle] = useState('')
+
 
 
     const listItems: Array<JSX.Element> = tasks.map((task: TaskType) => {
@@ -44,17 +47,23 @@ export function Todolist({
         ? <ul>{listItems}</ul>
         : <span>Tasks list is empty</span>
 
-
+const onChangeSetTasksTitle = (e:any)=>{
+    const inputTxt = e.target.value
+    setTaskTitle(inputTxt)
+}
 // добавление новой таски
-
+const onTasksHandler = ()=>{
+   addTasks(taskTitle)
+    setTaskTitle('')
+}
 
     return (
         <div className='todolist'>
             <div>
                 <h3>{title}</h3>
                 <div>
-                    <input />
-                    <Button title={'+'} onClickHandler={()=>{}}/>
+                    <input value = {taskTitle} onChange={onChangeSetTasksTitle}/>
+                    <Button title={'+'} isDisabled={!taskTitle} onClickHandler={onTasksHandler}/>
                 </div>
                 {tasksList}
                 <div>
