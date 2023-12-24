@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useState, KeyboardEvent} from "react";
 import {Button} from "./Button";
 import {isDisabled} from "@testing-library/user-event/dist/utils";
 
@@ -47,23 +47,34 @@ export function Todolist({
         ? <ul>{listItems}</ul>
         : <span>Tasks list is empty</span>
 
-const onChangeSetTasksTitle = (e:any)=>{
-    const inputTxt = e.target.value
-    setTaskTitle(inputTxt)
-}
+
+
+
 // добавление новой таски
-const onTasksHandler = ()=>{
-   addTasks(taskTitle)
+const addTasksHandler = ()=>{
+     const trimmedTasksTitle = taskTitle.trim()
+    if(trimmedTasksTitle){
+        addTasks(taskTitle)
+    }else {
+        alert('not understand')
+    }
+
     setTaskTitle('')
 }
+    const addTaskHandlerKeyBoard = (e: KeyboardEvent<HTMLInputElement>)=>{if(e.key === 'Enter' && taskTitle){addTasksHandler()}}
+
 
     return (
         <div className='todolist'>
             <div>
                 <h3>{title}</h3>
                 <div>
-                    <input value = {taskTitle} onChange={onChangeSetTasksTitle}/>
-                    <Button title={'+'} isDisabled={!taskTitle} onClickHandler={onTasksHandler}/>
+                    <input
+                        value = {taskTitle} onChange={(e)=>{
+                                 setTaskTitle(e.target.value)}}
+
+                    onKeyDown={addTaskHandlerKeyBoard}/>
+                    <Button title={'+'} isDisabled={!taskTitle} onClickHandler={addTasksHandler}/>
                 </div>
                 {tasksList}
                 <div>
@@ -73,5 +84,4 @@ const onTasksHandler = ()=>{
                 </div>
             </div>
         </div>
-    )
-}
+    )}
