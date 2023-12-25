@@ -13,3 +13,18 @@
   background-color: burlywood ;
   padding: 15px;
 }
+
+.task {
+  font-weight: bold;
+}
+
+.task-done{
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.btn-active{
+  background-color: brown;
+  color: white;
+  border: none;
+  border-radius: 1px;
+}
