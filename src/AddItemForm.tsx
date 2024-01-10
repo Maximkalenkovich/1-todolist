@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 
 type AddItemFormType = {
-    collBack:(title:string)=>void
+    callBack:(title:string)=>void
 }
 
 export const AddItemForm=(props:AddItemFormType)=>{
@@ -11,7 +11,7 @@ export const AddItemForm=(props:AddItemFormType)=>{
 
     const addTask = () => {
         if (title.trim() !== "") {
-            props.collBack(title);
+            props.callBack(title);
             setTitle("");
         } else {
             setError("Title is required");
