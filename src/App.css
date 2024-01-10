@@ -1,3 +1,4 @@
+
 .App {
   padding: 30px;
   display: flex;
@@ -7,24 +8,19 @@
   margin-right: 50px;
 }
 
-.todolist {
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: burlywood ;
-  padding: 15px;
+.error {
+  border: red 1px solid;
 }
 
-.task {
-  font-weight: bold;
+.error-message {
+  color: red;
 }
 
-.task-done{
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
   opacity: 0.5;
-  text-decoration: line-through;
 }
-.btn-active{
-  background-color: brown;
-  color: white;
-  border: none;
-  border-radius: 1px;
-}
+
