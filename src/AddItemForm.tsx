@@ -1,14 +1,17 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {IconButton, TextField} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
-type AddItemFormProps={
-    callBack:(title: string)=>void
-  }
 
-export const AddItemForm = (props:AddItemFormProps) => {
+type AddItemFormProps = {
+    callBack: (title: string) => void
+}
+
+export const AddItemForm = (props: AddItemFormProps) => {
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
-        const addTask = () => {
+    const addTask = () => {
         let newTitle = title.trim();
         if (newTitle !== "") {
             props.callBack(newTitle);
@@ -31,13 +34,18 @@ export const AddItemForm = (props:AddItemFormProps) => {
 
     return (
         <div>
-            <input value={title}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
-                   className={error ? "error" : ""}
+            <TextField value={title}
+                       onChange={onChangeHandler}
+                       onKeyPress={onKeyPressHandler}
+                       variant={"outlined"}
+                       error={!!error}
+                       helperText={'Incorrect entry.'}
+
             />
-            <button onClick={addTask}>+</button>
-            {error && <div className="error-message">{error}</div>}
+            <IconButton onClick={addTask} color={"primary"}>
+                <AddIcon/>
+            </IconButton>
+
         </div>
     );
 };
