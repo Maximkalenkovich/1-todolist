@@ -39,8 +39,7 @@ export const AddItemForm = (props: AddItemFormProps) => {
                        onKeyPress={onKeyPressHandler}
                        variant={"outlined"}
                        error={!!error}
-                       helperText={'Incorrect entry.'}
-
+                       helperText={error ? 'Incorrect entry.': ''}
             />
             <IconButton onClick={addTask} color={"primary"}>
                 <AddIcon/>

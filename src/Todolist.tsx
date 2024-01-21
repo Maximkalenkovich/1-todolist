@@ -4,6 +4,8 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, Checkbox, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 
 export type TaskType = {
@@ -53,7 +55,7 @@ export function Todolist(props: PropsType) {
         </h3>
         <AddItemForm callBack={addTaskHandler}/>
 
-        <ul>
+        <div>
             {
                 props.tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, props.id)
@@ -66,17 +68,23 @@ export function Todolist(props: PropsType) {
                         props.updateTask(props.id,t.id,title)
                     }
 
-                    return <li key={t.id} className={t.isDone ? "is-done" : ""}>
+                    return <div key={t.id} className={t.isDone ? "is-done" : ""}>
 
-                        <Checkbox defaultChecked color="success" checked={t.isDone}  onChange={onChangeHandler} />
+                        {/*<Checkbox defaultChecked color="success" checked={t.isDone}  onChange={onChangeHandler} />*/}
+                        <Checkbox
+                            checked={t.isDone}
+                            onChange={onChangeHandler}
+                            icon={<FavoriteBorderIcon />}
+                            checkedIcon={<FavoriteIcon />}
+                        />
                         <EditableSpan oldTitle={t.title} callBack={updateTaskHandler}/>
                         <IconButton aria-label="delete" color={'secondary'} onClick={onClickHandler}>
                             <Delete />
                         </IconButton>
-                    </li>
+                    </div>
                 })
             }
-        </ul>
+        </div>
         <div>
             <Button color={'success'} variant={props.filter === 'all' ? "contained" : "text"}
                     onClick={onAllClickHandler}>All

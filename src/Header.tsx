@@ -1,18 +1,16 @@
 import React from "react";
-import {
-    AppBar,
-    Box, Button,
-    IconButton,
-    Toolbar,
-    Typography
-} from "@mui/material";
-import {Menu} from "@mui/icons-material";
+import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { styled } from '@mui/system';
 
+const StyledAppBar = styled(AppBar)`
+  background-color: #e553c6; // Установите желаемый цвет фона AppBar
+`;
 
 export const Header = () => {
-    return(
+    return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <StyledAppBar position="static">
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -21,14 +19,16 @@ export const Header = () => {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        <Menu />
+                        <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         News
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-            </AppBar>
+            </StyledAppBar>
         </Box>
-)
-}
+    );
+};
+
+export default Header;
