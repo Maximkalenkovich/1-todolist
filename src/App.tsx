@@ -4,7 +4,10 @@ import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
 import {Header} from "./Header";
-import {Container, Grid, Paper} from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodolistType = {
@@ -149,8 +152,28 @@ function App() {
                         })}
                 </Grid>
             </Container>
+
+
         </div>
     );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
