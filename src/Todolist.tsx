@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import {CheckBox} from "./Cheked";
+
 
 
 export type TaskType = {
@@ -46,6 +48,11 @@ export function Todolist(props: PropsType) {
         props.updateTodolist(props.id,title)
     }
 
+const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
+        props.changeTaskStatus(tID,checked,props.id)
+}
+
+
     return <div>
         <h3>
 
@@ -61,10 +68,11 @@ export function Todolist(props: PropsType) {
             {
                 props.tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, props.id)
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        let newIsDoneValue = e.currentTarget.checked;
-                        props.changeTaskStatus(t.id, newIsDoneValue, props.id);
-                    }
+
+                    // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                    //     let newIsDoneValue = e.currentTarget.checked;
+                    //     props.changeTaskStatus(t.id, newIsDoneValue, props.id);
+                    // }
 
                     const updateTaskHandler = (title: string) => {
                         props.updateTask(props.id,t.id,title)
@@ -73,12 +81,7 @@ export function Todolist(props: PropsType) {
                     return <div key={t.id} className={t.isDone ? "is-done" : ""}>
 
                         {/*<Checkbox defaultChecked color="success" checked={t.isDone}  onChange={onChangeHandler} />*/}
-                        <Checkbox
-                            checked={t.isDone}
-                            onChange={onChangeHandler}
-                            icon={<FavoriteBorderIcon />}
-                            checkedIcon={<FavoriteIcon />}
-                        />
+                 <CheckBox checked={t.isDone} callback={(checked)=>onChangeHandlerStatus(t.id,checked)}/>
                         <EditableSpan oldTitle={t.title} callBack={updateTaskHandler}/>
                         <IconButton aria-label="delete" color={'secondary'} onClick={onClickHandler}>
                             <Delete />
