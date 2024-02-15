@@ -1,13 +1,10 @@
-import React, {ChangeEvent} from 'react';
-import {FilterValuesType} from './App';
+import React from 'react';
+import {FilterValuesType} from './AppWithReducer';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {CheckBox} from "./Cheked";
 
 
@@ -23,7 +20,7 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (taskId: string, todolistId: string) => void
-    changeFilter: (value: FilterValuesType, todolistId: string) => void
+    changeFilter: (value: FilterValuesType, todolistId: string,) => void
     addTask: (title: string, todolistId: string) => void
     changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
     removeTodolist: (id: string) => void
@@ -36,9 +33,9 @@ export function Todolist(props: PropsType) {
 
     const removeTodolist = () => props.removeTodolist(props.id)
 
-    const onAllClickHandler = () => props.changeFilter("all", props.id);
+    const onAllClickHandler = () => props.changeFilter("all",props.id);
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
-    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
+    const onCompletedClickHandler = () => props.changeFilter( "completed",props.id);
 
     const addTaskHandler = (title: string) => {
         props.addTask(title, props.id)

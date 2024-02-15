@@ -1,14 +1,13 @@
-import {FilterValuesType, TodolistType} from "../App";
+import {FilterValuesType, TodolistType} from "../AppWithReducer";
 import {v1} from "uuid";
 
 
-export const reducer = (state:TodolistType[],action:ActionTypeTodolist):TodolistType[] =>{
+export const todolistReducer = (state:TodolistType[],action:ActionTypeTodolist):TodolistType[] =>{
     switch (action.type) {
         case "REMOVE-TODOLIST":
             return state.filter(el => el.id != action.payload.id)
         case "ADD-TODOLIST":
-            const todolistId = v1()
-            const newTodo: TodolistType = {id: todolistId, title:action.payload.title, filter: "all"}
+            const newTodo: TodolistType = {id:action.payload.todolistId, title:action.payload.title, filter: "all"}
             return [...state,newTodo]
         case "CHANGE-TODOLIST":
             return state.map(el => el.id == action.payload.id ? {...el,title:action.payload.title} : el)
@@ -17,21 +16,26 @@ export const reducer = (state:TodolistType[],action:ActionTypeTodolist):Todolist
         default: throw new Error('NON ACTION ')
     }
 }
-type ActionTypeTodolist = RemoveTodolistACType | AddTodolistActionType | ChangeTodolistActionType | ChangeFilterTodolistActionType
+export type ActionTypeTodolist = RemoveTodolistACType | AddTodolistActionType | ChangeTodolistActionType | ChangeFilterTodolistActionType
 
-type RemoveTodolistACType = ReturnType<typeof removeTodolistAC>
+export type RemoveTodolistACType = ReturnType<typeof removeTodolistAC>
 export const  removeTodolistAC = (id:string) => {
     return{
         type:"REMOVE-TODOLIST",
-        payload:{id}
+        payload:{
+            id
+        }
     }as const
 }
 
-type AddTodolistActionType = ReturnType<typeof addTodolistAction>
+export type AddTodolistActionType = ReturnType<typeof addTodolistAction>
 export const  addTodolistAction = (title:string) => {
     return{
         type:"ADD-TODOLIST",
-        payload:{title}
+        payload:{
+            title,
+            todolistId:v1()
+        }
     }as const
 }
 

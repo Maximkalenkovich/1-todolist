@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {TextRotateUp} from "@mui/icons-material";
+
 import {TextField} from "@mui/material";
 
 type EditableSpanProps = {
