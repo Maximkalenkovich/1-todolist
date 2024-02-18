@@ -1,4 +1,4 @@
-import {TasksStateType} from "../AppWithReducer";
+import {TasksStateType} from "../AppWithRedux";
 import {
     addTasksActionCreate, changeStatusActionCreate, changeTaskTitleActionCreate,
     removeTaskActionCreate,

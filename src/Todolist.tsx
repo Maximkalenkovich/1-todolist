@@ -1,5 +1,5 @@
 import React from 'react';
-import {FilterValuesType} from './AppWithReducer';
+import {FilterValuesType} from './AppWithRedux';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import Button from "@mui/material/Button";
