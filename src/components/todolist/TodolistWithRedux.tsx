@@ -1,20 +1,20 @@
-import React from 'react';
-import {FilterValuesType} from './AppWithRedux';
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import React, {memo} from 'react';
+import {FilterValuesType} from '../../AppWithRedux';
+import {AddItemForm} from "../additemForm/AddItemForm";
+import {EditableSpan} from "../editableSpan/EditableSpan";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
-import {CheckBox} from "./Cheked";
+import {CheckBox} from "../chekbox/Cheked";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./state/store";
-import {changeFilterTodolistAction, changeTodolistAction, removeTodolistAC} from "./state/todolist-reducer";
+import {AppRootStateType} from "../../state/store";
+import {changeFilterTodolistAction, changeTodolistAction, removeTodolistAC} from "../../state/todolist-reducer";
 import {
     addTasksActionCreate,
     changeStatusActionCreate,
     changeTaskTitleActionCreate,
     removeTaskActionCreate
-} from "./state/tasks-reducer";
+} from "../../state/tasks-reducer";
 
 
 
@@ -31,7 +31,7 @@ type PropsType = {
 
 }
 
-export function TodolistWithRedux(props: PropsType) {
+export const TodolistWithRedux = memo((props: PropsType)=> {
 
 
     let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.id])
@@ -63,11 +63,8 @@ const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
             if (props.filter === "completed") {
                 tasks = tasks.filter(t => t.isDone);
             }
-
-
     return <div>
         <h3>
-
             <EditableSpan oldTitle={props.title} callBack={updateTodolistHandler}/>
             <IconButton aria-label="delete" color={'secondary'} onClick={removeTodolist}>
                 <Delete />
@@ -75,7 +72,6 @@ const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
 
         </h3>
         <AddItemForm callBack={addTaskHandler}/>
-
         <div>
             {
                 tasks.map(t => {
@@ -109,6 +105,6 @@ const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
             </Button>
         </div>
     </div>
-}
+})
 
 

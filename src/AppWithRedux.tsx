@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, TodolistWithRedux} from './TodolistWithRedux';
-import {AddItemForm} from "./AddItemForm";
-import {Header} from "./Header";
+import {TaskType, TodolistWithRedux} from './components/todolist/TodolistWithRedux';
+import {AddItemForm} from "./components/additemForm/AddItemForm";
+import {Header} from "./components/header/Header";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -58,11 +58,11 @@ function AppWithRedux() {
         dispatch(action)
     }
 
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         let action = addTodolistAction(title)
         dispatch(action)
 
-    }
+    },[])
 
     const updateTask = (todolistId: string, title: string, taskId: string) => {
         dispatch(changeTaskTitleActionCreate(todolistId, title, taskId))
@@ -77,15 +77,11 @@ function AppWithRedux() {
             <Header/>
             <Container fixed>
                 <Grid container style={{padding: '10px'}}><AddItemForm callBack={addTodolist}/></Grid>
-
                 <Grid container spacing={4}>
-
                     {
                         todolists.map(tl => {
-
                             return (
-
-                                <Grid item>
+                                <Grid item key={tl.id}>
                                     <Paper style={{padding: '10px'}}>
                                         <TodolistWithRedux
                                             id={tl.id}
@@ -94,8 +90,6 @@ function AppWithRedux() {
                                         />
                                     </Paper>
                                 </Grid>
-
-
                             )
                         })}
                 </Grid>

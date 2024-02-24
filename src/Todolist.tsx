@@ -1,11 +1,11 @@
 import React from 'react';
 import {FilterValuesType} from './AppWithRedux';
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import {AddItemForm} from "./components/additemForm/AddItemForm";
+import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
-import {CheckBox} from "./Cheked";
+import {CheckBox} from "./components/chekbox/Cheked";
 
 
 
