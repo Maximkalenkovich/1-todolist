@@ -9,7 +9,7 @@ type AddItemFormProps = {
 }
 
 export const AddItemForm = memo((props: AddItemFormProps) => {
-    console.log('addItemForm')
+
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 

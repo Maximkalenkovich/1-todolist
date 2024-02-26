@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import {FilterValuesType} from '../../AppWithRedux';
 import {AddItemForm} from "../additemForm/AddItemForm";
 import {EditableSpan} from "../editableSpan/EditableSpan";
@@ -32,18 +32,16 @@ type PropsType = {
 }
 
 export const TodolistWithRedux = memo((props: PropsType)=> {
-
+    console.log('todolist')
 
     let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.id])
     let dispatch = useDispatch()
 
     const removeTodolist = () => dispatch(removeTodolistAC(props.id))
 
-
-
-    const addTaskHandler = (title: string) => {
+    const addTaskHandler = useCallback((title: string) => {
         dispatch(addTasksActionCreate(title, props.id))
-    }
+    },[props.id,dispatch])
 
     const updateTodolistHandler=(title: string)=>{
        dispatch(changeTodolistAction(props.id,title))

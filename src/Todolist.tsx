@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback} from 'react';
 import {FilterValuesType} from './AppWithRedux';
 import {AddItemForm} from "./components/additemForm/AddItemForm";
 import {EditableSpan} from "./components/editableSpan/EditableSpan";
@@ -29,7 +29,7 @@ type PropsType = {
     updateTodolist:(todolistId: string,title: string)=>void
 }
 
-export function Todolist(props: PropsType) {
+export const Todolist = memo((props: PropsType)=>{
 
     const removeTodolist = () => props.removeTodolist(props.id)
 
@@ -37,17 +37,17 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter( "completed",props.id);
 
-    const addTaskHandler = (title: string) => {
+    const addTaskHandler = useCallback((title: string) => {
         props.addTask(title, props.id)
-    }
+    },[props.addTask,props.id])
 
-    const updateTodolistHandler=(title: string)=>{
+    const updateTodolistHandler=useCallback((title: string)=>{
         props.updateTodolist(props.id,title)
-    }
+    },[props.updateTodolist,props.id])
 
-const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
+const onChangeHandlerStatus = useCallback((tID:string,checked:boolean) =>{
         props.changeTaskStatus(tID,checked,props.id)
-}
+},[props.changeTaskStatus,props.id])
 
 
     return <div>
@@ -100,6 +100,6 @@ const onChangeHandlerStatus = (tID:string,checked:boolean) =>{
             </Button>
         </div>
     </div>
-}
+})
 
 
