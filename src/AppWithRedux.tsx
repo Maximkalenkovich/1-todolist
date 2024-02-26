@@ -18,11 +18,9 @@ export type TodolistType = {
     title: string
     filter: FilterValuesType
 }
-
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 
 export const AppWithRedux = () => {
 
