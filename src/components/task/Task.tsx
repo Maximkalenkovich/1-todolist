@@ -8,7 +8,7 @@ import {changeStatusActionCreate, changeTaskTitleActionCreate, removeTaskActionC
 import {useDispatch} from "react-redux";
 
 
-type TaskPropsType ={
+export type TaskPropsType ={
     task:TaskType
     todolistId:string
 }

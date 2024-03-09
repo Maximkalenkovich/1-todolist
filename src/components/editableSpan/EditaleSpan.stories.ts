@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import {EditableSpan} from "./EditableSpan";
 
 
-import {AddItemForm} from "../components/additemForm/AddItemForm";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof AddItemForm> = {
-  title: 'TODOLIST/AddItemForm',
-  component: AddItemForm,
+const meta: Meta<typeof EditableSpan> = {
+  title: 'TODOLIST/EditableSpan',
+  component: EditableSpan,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -17,14 +17,18 @@ const meta: Meta<typeof AddItemForm> = {
   argTypes: {
 callBack: {
   description:'Button Clicked add new item ',
-  action:'clicked'
-}
+  action:'Value EditableSpan changed'
+},
+oldTitle:{
 
+  defaultValue:'ere',
+}
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof AddItemForm>;
+type Story = StoryObj<typeof EditableSpan>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const AddItemFormStory: Story = {};
+export const EditableSpanStory: Story = {}
+
